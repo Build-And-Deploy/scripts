@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Running System Health Check"
+
 echo -e "CPU Load:"
 uptime
 
