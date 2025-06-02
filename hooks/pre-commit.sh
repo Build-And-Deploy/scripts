@@ -1,4 +1,9 @@
 #!/bin/bash
+# [1] https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks.html
+
+# This hook runs first, before a commit message has even been typed. 
+# Used to inspect the snapshot about to be commit.
+
 # Basic script to check which branch the commit is made to
 
 # $(...) --> Command runs inside the parentheses, and substitues its output in place
