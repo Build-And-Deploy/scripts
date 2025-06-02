@@ -1,4 +1,7 @@
 #!/bin/bash
+# This hook is used to inspect the snapshot thats about to be commited.
+# Exiting non zero from this hook aborts commit
+
 # Basic script to check which branch the commit is made to
 
 # $(...) --> Command runs inside the parentheses, and substitues its output in place
