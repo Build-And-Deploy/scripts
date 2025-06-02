@@ -26,7 +26,10 @@ COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")                                        # Re
 
 REGEX="^[A-Z]{2,5}-[0-9]+: .+"                                              # Defines regex to force prefix like "ABC-123" at start of msg
 
-if ! echo "$COMMIT_MSG" | grep -Eq "$REGEX"; then
+# Checks if commit message matches the regex pattern
+# Prints the content of the commit message, and passed output to the grep command via pipe '|'
+# -E enables extended regex, -q enables quiet mode
+if ! echo "$COMMIT_MSG" | grep -Eq "$REGEX"; then                           
   echo "Commit Message is invalid!"
   echo "Expected Format: ABC-123: Short message"
   exit 1
