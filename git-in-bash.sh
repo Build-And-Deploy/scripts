@@ -124,5 +124,46 @@ if [ $# -lt 1 ]; then
 fi
 
 # =========================================================
-# GIT COMMANDS
+# GIT COMMANDS - BASICS
 # =========================================================
+
+# =========================================================
+# GIT COMMANDS - HOOKS
+# =========================================================
+
+# Get a list of staged files
+git diff --cached --name-only
+
+# Get a list of modified (unstaged) files
+git diff --name-only
+
+# Check if a specific file is staged
+git diff --cached --name-only | grep -q "filename.txt"
+
+# Check for blocked extensions
+git diff --cached --name-only | grep -E '\.env$|\.log$|\.secret$'
+
+# Get the commit message file (Passed as $1 in hook)
+cat "$1"
+
+# Get the current branch name
+git rev-parse --abbrev-ref HEAD
+
+# Check what branch is being pushed to
+read local_ref local_sha remote_ref remote_sha
+
+# Get commit author and message
+git log -1 --pretty=format:"%h by %an on %ad%n%s"
+
+# Get the commit message of latest commit
+git log -1 --pretty=%B
+
+# Check if a specific folder has changes staged
+git diff --cached --name-only | grep -q "^repoData/"
+
+# Count number of changes in a folder
+git diff --cached --name-only | grep "^repoData/" | wc -l
+
+# Show changed file in last commit
+git show --name-only --pretty="" HEAD
+
