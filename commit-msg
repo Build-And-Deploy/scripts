@@ -1,18 +1,16 @@
 #!/bin/bash
 
-# Read commit message
-# Check if mesg contains WIP
-# If it does, block the commit
-
 COMMIT_MSG_FILE="$1"
 COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+REGEX="^[A-Z]+-\d+:.+$"
 
 echo "Commit Message Hook: Checking commit message..."
 
-if echo "$COMMIT_MSG" | grep -q "WIP"; then
-    echo "Commit Blocked: Commit message contains 'WIP'"
+if ! echo "$COMMIT_MSG" | grep -qE "$REGEX"; then
+    echo "Commit Message does not follow the required format!"
+    echo "Expected Format: ABC-123: Your commit message"
     exit 1
 fi
 
-echo "Commit Message Accepted!"
+echo "Commit Message Validated"
 exit 0
