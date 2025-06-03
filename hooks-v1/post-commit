@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# 
+
+
+echo "Pre-Commit Hook: Checking before commit..."
+
+exit 0
