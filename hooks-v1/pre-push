@@ -1,1 +1,17 @@
 #!/bin/sh
+# Pre Push Hook to prevent pushing to the main branch
+
+echo "Pre-Push Hook: Checking before push..."
+
+# Get the current branch name
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$CURRENT_BRANCH" = "main" ]; then
+	echo "Push Blocked: You are trying to push to the 'main' branch."
+	echo "Please push to a feature branch instead."
+	exit 1
+fi
+
+echo "Push Allowed"
+exit 0
+
