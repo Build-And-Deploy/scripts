@@ -1,9 +1,16 @@
 #!/bin/sh
-# 
+# Commit message hook to prevent empty commit messages
 
 echo "Commit Message Hook: Checking commit message..."
 
 COMMIT_MSG_FILE="$1"
-COMMIT_MSG=$(cat $"COMMIT_MSG_FILE")
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Check if commit message is empty or only whitespace
+if [ -z "$COMMIT_MSG" ] || [ -z "$(echo "$COMMIT_MSG" | tr -d '[:space:]')" ]; then
+	echo "Error: Commit Message is empty or only whitespace."
+	echo "Please provide a valid commit message."
+	exit 1
+fi
 
 exit 0
