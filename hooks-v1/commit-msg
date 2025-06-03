@@ -5,6 +5,7 @@ echo "Commit Message Hook: Checking commit message..."
 
 COMMIT_MSG_FILE="$1"
 COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+REGEX="^[A-Z]+-\d+:.+$"
 
 # Check if commit message is empty or only whitespace
 if [ -z "$COMMIT_MSG" ] || [ -z "$(echo "$COMMIT_MSG" | tr -d '[:space:]')" ]; then
@@ -13,4 +14,13 @@ if [ -z "$COMMIT_MSG" ] || [ -z "$(echo "$COMMIT_MSG" | tr -d '[:space:]')" ]; t
 	exit 1
 fi
 
+# Check if commit message matches the regex pattern
+if ! echo "$COMMIT_MSG" | grep -qE "$REGEX"; then
+    echo "Commit Message does not follow the required format."
+    echo "Expected Format: ABC-123: Your commit message"
+    exit 1
+fi
+
+
+echo "Commit Message Validated."
 exit 0
