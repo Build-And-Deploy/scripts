@@ -1,2 +1,18 @@
 #!/bin/bash
 
+# Read commit message
+# Check if mesg contains WIP
+# If it does, block the commit
+
+COMMIT_MSG_FILE="$1"
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+echo "Commit Message Hook: Checking commit message..."
+
+if echo "$COMMIT_MSG" | grep -q "WIP"; then
+    echo "Commit Blocked: Commit message contains 'WIP'"
+    exit 1
+fi
+
+echo "Commit Message Accepted!"
+exit 0
