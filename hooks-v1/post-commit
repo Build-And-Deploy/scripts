@@ -1,1 +1,6 @@
 #!/bin/sh
+# A basic post commit hook
+
+echo "Post Commit Hook: Running after commit..."
+echo "Last Commit: "
+git log -1 --pretty=format:"%h by &an on %ad%n%s" --date=short
