@@ -7,11 +7,17 @@ echo "Pre-Push Hook: Checking before push..."
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [ "$CURRENT_BRANCH" = "main" ]; then
-	echo "Push Blocked: You are trying to push to the 'main' branch."
-	echo "Please push to a feature branch instead."
-	exit 1
-fi
+	echo "Warning: You are trying to push to the 'main' branch."
 
-echo "Push Allowed"
+	read -p "Are you sure you want to push to main? (y/n): " answer
+	if [ "$answer" != "y" ]; then
+		echo "Push Cancelled."
+		exit 1
+	fi 
+
+	echo "Proceeding with push to main."
+else
+	echo "Push Allowed (branch: $CURRENT_BRANCH)"
+fi 
+
 exit 0
-
