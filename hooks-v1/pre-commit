@@ -1,1 +1,14 @@
 #!/bin/sh
+# 
+
+echo "Pre-Commit Hook: Checking before commit..."
+BLOCKED_FILE="blocked_file.txt"
+
+# Only block commit if the file is staged
+if git diff --cached --name-only | grep -q "$BLOCKED_FILE"; then
+    echo "Commit Blocked: '$BLOCKED_FILE' is staged for commit."
+    echo "Please remove it from the staging area before committing."
+    exit 1
+fi
+
+exit 0
