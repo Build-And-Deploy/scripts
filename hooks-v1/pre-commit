@@ -7,6 +7,23 @@ echo "Pre-Commit Hook: Checking before commit..."
 BLOCKED_FILE="blocked_file.txt"
 BLOCKED_FILES="\.env$|\.secret$|\.config$|\.log$|\.txt$"
 
+# Show staged files
+echo "Files Staged for Commit:"
+git diff --cached --name-only
+
+# Confirm commit with user input
+read -p "Are you sure you want to commit? (y/n):" answer
+if [ "$answer" != "y" ]; then
+	echo "Commit Cancelled."
+	exit 1
+fi
+
+# Block commits with TODO
+if git diff --cached | grep -q "TODO"; then
+	echo "Commit Blocked: Found 'TODO' in code. Please resolve it first."
+	exit 1
+fi
+
 # Only block commit if the file is staged
 if git diff --cached --name-only | grep -q "$BLOCKED_FILE"; then
     echo "Commit Blocked: '$BLOCKED_FILE' is staged for commit."
