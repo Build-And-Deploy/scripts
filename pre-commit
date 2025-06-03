@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo "Make sure your commit message is clear and meaningful!"
-exit 0

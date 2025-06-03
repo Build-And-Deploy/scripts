@@ -1,6 +1,7 @@
 #!/bin/sh
 # Pre Commit Hook can only see files in staging area
 
+echo "Make sure your commit message is clear and meaningful!"
 echo "Pre-Commit Hook: Checking before commit..."
 
 BLOCKED_FILE="blocked_file.txt"
